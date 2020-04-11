@@ -8,12 +8,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {ProductModule} from './products/product.module';
 import {AppRoutingModule} from './app-routing.module';
 import {CustomerComponent} from './customers/customer.component';
+import { DemoComponent } from './demo/demo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
-    CustomerComponent
+    CustomerComponent,
+    DemoComponent
   ],
   imports: [
     BrowserModule,
