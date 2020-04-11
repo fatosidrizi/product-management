@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="card cont">
+    <div class="card-header">
+      Demo!
+    </div>
+
+    <div class="card-body">
+      <form novalidate [formGroup]="demoForm" (ngSubmit)="save()">
+
+        <div class="form-group">
+          <label for="userId">User</label>
+          <input type="text"
+                 class="form-control"
+                 id="userId"
+                 formControlName="userName"
+                 [ngClass]="{'is-invalid': demoForm.get('userName').touched && !demoForm.get('userName').valid}">
+          <span class="invalid-feedback" *ngIf="demoForm.get('userName').errors?.required">
+            Username is required.
+          </span>
+
+        </div>
+
+        <div formGroupName="passwordGroup">
+          <div class="form-group">
+            <label for="passwordId">Password</label>
+            <input type="password"
+                   class="form-control"
+                   id="passwordId"
+                   formControlName="password"
+                   [ngClass]="{'is-invalid': demoForm.get('passwordGroup').errors || (demoForm.get('passwordGroup.password').touched &&
+                                            !demoForm.get('passwordGroup.password').value)}">
+            <span class="invalid-feedback" *ngIf="demoForm.get('passwordGroup.password').errors?.required">
+              Password is required
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="confirmPasswordId">Confirm Password</label>
+            <input type="password"
+                   class="form-control"
+                   id="confirmPasswordId"
+                   formControlName="confirmPassword"
+                   [ngClass]="{'is-invalid': demoForm.get('passwordGroup').errors ||
+                                           (demoForm.get('passwordGroup.confirmPassword').touched &&
+                                           !demoForm.get('passwordGroup.confirmPassword').value)}">
+            <span class="invalid-feedback" *ngIf="demoForm.get('passwordGroup.password').errors?.required">
+              Confirm Password is required
+            </span>
+            <span class="invalid-feedback" *ngIf="demoForm.get('passwordGroup').errors?.match">
+              Passwords don't match.
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <div class="offset-md-2 col-md-4">
+            <button class="btn btn-primary mr-3"
+                    type="submit"
+                    style="width:80px"
+                    [title]="demoForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                    [disabled]="!demoForm.valid">
+              Save
+            </button>
+            <button class="btn btn-secondary" (click)="populateTestData()">Test Data</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
