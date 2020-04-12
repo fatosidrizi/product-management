@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {AbstractControl, FormArray, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 
 import {Customer} from './customer';
 
@@ -35,6 +35,12 @@ export class CustomerComponent implements OnInit {
   customerForm: FormGroup;
   customer = new Customer();
 
+  // this getter returns a form array.
+  get addresses(): FormArray {
+    // return <FormArray> this.customerForm.get('addresses') <cast to desired type> or write as below.
+    return this.customerForm.get('addresses') as FormArray;
+  }
+
   constructor(private fb: FormBuilder) {
   }
 
@@ -50,11 +56,16 @@ export class CustomerComponent implements OnInit {
       phone: '',
       notification: 'email',
       rating: [null, ratingRange(1, 5)],
-      sendCatalog: true
+      sendCatalog: true,
+      // addresses: this.buildAddress() // If we want a dynamic form gorup we should add array insetad.
+      addresses: this.fb.array([this.buildAddress()])
     });
 
     this.customerForm.get('notification').valueChanges.subscribe(
-      value => this.setNotification(value)
+      value => {
+        this.setNotification(value);
+        console.log(value);
+      }
     );
   }
 
@@ -62,8 +73,23 @@ export class CustomerComponent implements OnInit {
     this.customerForm.patchValue({
       firstName: 'Jack',
       lastName: 'Hanks',
-      sendCatalog: false,
+      sendCatalog: true,
     });
+  }
+
+  buildAddress(): FormGroup {
+    return this.fb.group({
+      addressType: 'home',
+      street1: '',
+      street2: '',
+      city: '',
+      state: '',
+      zip: ''
+    });
+  }
+
+  addAddress(): void {
+    this.addresses.push(this.buildAddress());
   }
 
   save() {

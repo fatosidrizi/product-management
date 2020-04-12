@@ -40,6 +40,8 @@ export class DemoComponent implements OnInit {
   }
 
   populateTestData() {
-
+    this.demoForm.patchValue({
+      userName: 'admin',
+    });
   }
 }
