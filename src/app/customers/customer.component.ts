@@ -79,7 +79,7 @@ export class CustomerComponent implements OnInit {
 
   buildAddress(): FormGroup {
     return this.fb.group({
-      addressType: 'home',
+      addressType: '',
       street1: '',
       street2: '',
       city: '',
