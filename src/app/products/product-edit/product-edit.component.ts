@@ -1,5 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ProductService} from '../product.service';
+import {Subscription} from 'rxjs';
 
 function ratingRange(min: number, max: number): ValidatorFn {
   return (c: AbstractControl): { [key: string]: boolean } | null => {
@@ -14,10 +17,15 @@ function ratingRange(min: number, max: number): ValidatorFn {
   selector: 'pm-product-edit',
   templateUrl: './product-edit.component.html',
 })
-export class ProductEditComponent implements OnInit {
+export class ProductEditComponent implements OnInit, OnDestroy {
   productForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  private sub: Subscription;
+
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private route: ActivatedRoute,
+              private productService: ProductService) {
   }
 
   get tags(): FormArray {
@@ -49,6 +57,17 @@ export class ProductEditComponent implements OnInit {
       tags: this.fb.array([]),
       description: ''
     });
+
+    this.sub = this.route.paramMap.subscribe(
+      params => {
+        const id = +params.get('id');
+        this.getProduct(id);
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   addTag() {
@@ -63,5 +82,8 @@ export class ProductEditComponent implements OnInit {
     return this.fb.group({
       tag: ''
     });
+  }
+
+  private getProduct(id: number) {
   }
 }

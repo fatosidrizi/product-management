@@ -3,8 +3,8 @@ import {RouterModule} from '@angular/router';
 import {ProductListComponent} from './product-list.component';
 import {ProductDetailGuard} from './product-detail.guard';
 import {ProductDetailComponent} from './product-detail.component';
-import {ProductEditGuard} from './product-edit.guard';
-import {ProductEditComponent} from './product-edit.component';
+import {ProductEditGuard} from './product-edit/product-edit.guard';
+import {ProductEditComponent} from './product-edit/product-edit.component';
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import {ProductEditComponent} from './product-edit.component';
       },
       {
         path: 'products/:id/edit',
-        canActivate: [ProductEditGuard],
+        canDeactivate: [ProductEditGuard],
         component: ProductEditComponent
       },
     ]),

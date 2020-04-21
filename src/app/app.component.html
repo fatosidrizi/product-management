@@ -1,10 +1,12 @@
 <nav class="navbar navbar-expand navbar-light bg-light">
   <a class="navbar-brand">{{pageTitle}}</a>
-  <ul class="nav nav-pills">
-    <li><a class="nav-link" [routerLink]="['/welcome']">Home</a></li>
-    <li><a class="nav-link" [routerLink]="['/products']">Product List</a></li>
-    <li><a class="nav-link" [routerLink]="['/customer']">Customer</a></li>
-    <li><a class="nav-link" [routerLink]="['/demo']">Demo</a></li>
+  <ul class="navbar-nav nav-pills">
+    <li class="nav-item"><a class="nav-link" [routerLink]="['/welcome']">Home</a></li>
+    <li class="nav-item"><a class="nav-link" [routerLink]="['/products']">Product List</a></li>
+    <li class="nav-item"><a class="nav-link" [routerLink]="['/products/0/edit']">Add Product</a></li>
+    <li class="nav-item"><a class="nav-link" [routerLink]="['/customer']">Customer</a></li>
+    <li class="nav-item"><a class="nav-link" [routerLink]="['/demo']">Demo</a></li>
+    <li class="nav-item"><a class="nav-link" [routerLink]="['/user-settings']">User Settings</a></li>
   </ul>
 </nav>
 <router-outlet></router-outlet>
