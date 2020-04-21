@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IProduct} from './product';
+import {Product} from './product';
 import {ProductService} from './product.service';
 
 @Component({
@@ -13,8 +13,8 @@ export class ProductListComponent implements OnInit {
   imageWidth = 50;
   imageMargin = 2;
   showImage = false;
-  filteredProducts: IProduct[];
-  products: IProduct[] = [];
+  filteredProducts: Product[];
+  products: Product[] = [];
   errorMessage: string;
 
   constructor(private productService: ProductService) {
@@ -52,7 +52,7 @@ export class ProductListComponent implements OnInit {
     this.pageTitle = 'Product List ' + message;
   }
 
-  private performfilter(filterBy: string): IProduct[] {
+  private performfilter(filterBy: string): Product[] {
     filterBy = filterBy.toLowerCase();
     // const filteredArr = this.countProductsWithNameContains(this.products, filterBy);
     // return filteredArr;
@@ -60,7 +60,7 @@ export class ProductListComponent implements OnInit {
       product.productName.toLowerCase().indexOf(filterBy) !== -1);
   }
 
-  private countProductsWithNameContains(products: IProduct[], search: string): IProduct[] {
+  private countProductsWithNameContains(products: Product[], search: string): Product[] {
     const filteredArr = [];
     for (const p of products) {
       if (p.productName.toLowerCase().indexOf(search) !== -1) {

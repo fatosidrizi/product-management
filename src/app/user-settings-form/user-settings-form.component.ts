@@ -10,11 +10,11 @@ import {NgForm} from '@angular/forms';
 export class UserSettingsFormComponent implements OnInit {
 
   originalUserSettings: UserSettings = {
-    name: 'Eris',
-    emailOffers: true,
-    interfaceStyle: 'dark',
-    subscriptionType: 'Monthly',
-    notes: 'Notes ....'
+    name: '',
+    emailOffers: false,
+    interfaceStyle: '',
+    subscriptionType: '',
+    notes: ''
   };
 
   userSettings: UserSettings = {...this.originalUserSettings};
